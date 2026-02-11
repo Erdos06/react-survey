@@ -8,7 +8,7 @@ function Option({ option, index, setOptions, options }) {
         name="option"
         placeholder="Введите вариант ответа"
         className="option-input"
-        value={option}
+        value={option.optionText}
         onChange={(e) => {
           const updatedOptions = options.map((opt, i) => (i === index ? e.target.value : opt));
           setOptions(updatedOptions);

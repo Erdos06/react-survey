@@ -10,6 +10,7 @@ function ScaleLabel({ index, options, setOptions }) {
           const updatedOptions = options.map((opt, i) => (i === index ? e.target.value : opt));
           setOptions(updatedOptions);
         }}
+        value={options[index].optionText}
       />
     </label>
   );

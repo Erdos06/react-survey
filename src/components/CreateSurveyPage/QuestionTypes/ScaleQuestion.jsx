@@ -3,9 +3,11 @@ import React from 'react';
 import './ScaleQuestion.scss';
 import ScaleLabel from './ScaleLabel';
 
-function ScaleQuestion({ questionIndex, questions, setQuestions }) {
-  const [options, setOptions] = React.useState(['', '', '', '', '']);
-  const [questionText, setQuestionText] = React.useState('');
+function ScaleQuestion({ questionIndex, setQuestions, question }) {
+  const [options, setOptions] = React.useState(
+    question != null ? question.options : ['', ', ', '', '', ''],
+  );
+  const [questionText, setQuestionText] = React.useState(question != null ? question.text : '');
 
   React.useEffect(() => {
     setQuestions((prev) =>

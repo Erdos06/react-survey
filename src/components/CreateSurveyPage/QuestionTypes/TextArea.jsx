@@ -2,8 +2,8 @@ import React from 'react';
 
 import './TextArea.scss';
 
-function TextArea({ questions, setQuestions, questionIndex }) {
-  const [questionText, setQuestionText] = React.useState('');
+function TextArea({ questions, setQuestions, questionIndex, question }) {
+  const [questionText, setQuestionText] = React.useState(question != null ? question.text : '');
 
   React.useEffect(() => {
     setQuestions((prev) =>

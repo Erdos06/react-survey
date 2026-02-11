@@ -81,6 +81,11 @@ function SurveyBlock({ survey }) {
         <span className="delete-survey-button" onClick={handleDelete}>
           Удалить опрос
         </span>
+        <span
+          className="edit-survey-button"
+          onClick={() => navigate(`/surveys/${survey.surveyId}/change`)}>
+          Изменить опрос
+        </span>
       </div>
     </div>
   );

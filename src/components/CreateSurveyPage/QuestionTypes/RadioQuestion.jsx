@@ -2,9 +2,9 @@ import React from 'react';
 
 import Option from './Options';
 
-function RadioQuestion({ setQuestions, questionIndex, questionType }) {
-  const [questionText, setQuestionText] = React.useState('');
-  const [options, setOptions] = React.useState(['', '']);
+function RadioQuestion({ setQuestions, questionIndex, questionType, question }) {
+  const [questionText, setQuestionText] = React.useState(question != null ? question.text : '');
+  const [options, setOptions] = React.useState(question != null ? question.options : ['', '']);
 
   React.useEffect(() => {
     setQuestions((prev) =>

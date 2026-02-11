@@ -7,8 +7,10 @@ import DefaultQuestionState from './DefaultQuestionState';
 import ScaleQuestion from './ScaleQuestion';
 import TextArea from './TextArea';
 
-function Question({ questionIndex, questions, setQuestions }) {
-  const [questionType, setQuestionType] = React.useState('--выбери тип--');
+function Question({ questionIndex, questions, setQuestions, question }) {
+  const [questionType, setQuestionType] = React.useState(
+    question != null ? question.type : '--выбери тип--',
+  );
 
   return (
     <div className="question-card">
@@ -18,12 +20,12 @@ function Question({ questionIndex, questions, setQuestions }) {
       </div>
       <div className="divider-line" />
 
-      {renderQuestion(questionType, setQuestions, questionIndex, questions)}
+      {renderQuestion(questionType, setQuestions, questionIndex, questions, question)}
     </div>
   );
 }
 
-function renderQuestion(questionType, setQuestions, questionIndex, questions) {
+function renderQuestion(questionType, setQuestions, questionIndex, questions, question) {
   if (questionType === 'radio' || questionType === 'checkbox') {
     return (
       <RadioQuestion
@@ -31,6 +33,7 @@ function renderQuestion(questionType, setQuestions, questionIndex, questions) {
         questionIndex={questionIndex}
         questions={questions}
         questionType={questionType}
+        question={question}
       />
     );
   } else if (questionType === 'scale') {
@@ -39,11 +42,17 @@ function renderQuestion(questionType, setQuestions, questionIndex, questions) {
         setQuestions={setQuestions}
         questionIndex={questionIndex}
         questions={questions}
+        question={question}
       />
     );
   } else if (questionType === 'textarea') {
     return (
-      <TextArea questions={questions} setQuestions={setQuestions} questionIndex={questionIndex} />
+      <TextArea
+        questions={questions}
+        setQuestions={setQuestions}
+        questionIndex={questionIndex}
+        question={question}
+      />
     );
   } else {
     return <DefaultQuestionState questionType={questionType} />;

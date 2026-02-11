@@ -15,7 +15,6 @@ function MainPageSurveys() {
     }
     loadSurveys();
   }, []);
-  console.log(surveys);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -37,7 +36,6 @@ async function fetchSurveys() {
   const response = await fetch('http://localhost:8081/surveys/');
   if (!response.ok) throw new Error('Failed to fetch surveys: ' + response.status);
   const data = await response.json();
-  console.log(data);
 
   return data;
 }
