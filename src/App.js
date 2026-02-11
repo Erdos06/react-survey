@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import '@fontsource/montserrat';
 import './App.css';
 
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import HomePage from './components/HomePage';
+import AuthPage from './components/LoginPage';
+import SurveyPage from './components/SurveyPage';
+import NotFound from './components/NotFound';
+import CreateSurveyPage from './components/CreateSurveyPage';
+
+export const LoggedInContext = React.createContext(true);
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<AuthPage signupPressed={false} />} />
+          <Route path="/register" element={<AuthPage signupPressed={true} />} />
+          <Route path="/surveys/:id" element={<SurveyPage />} />
+          <Route path="/surveys/new" element={<CreateSurveyPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </LoggedInContext.Provider>
     </div>
   );
 }

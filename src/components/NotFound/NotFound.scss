@@ -1,0 +1,13 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  margin-top: 50px;
+  font-family: 'Montserrat', sans-serif;
+
+  h1 {
+    font-size: 48px;
+    color: #ff6b6b;
+  }
+}

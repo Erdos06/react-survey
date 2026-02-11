@@ -1,0 +1,716 @@
+/* survey-styles.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.survey-page-main {
+  color: #333;
+  line-height: 1.6;
+  padding: 5px 20px;
+  min-height: 100vh;
+}
+
+.survey-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Шапка опроса */
+/* Шапка опроса */
+.survey-header {
+  background: linear-gradient(135deg, #7c4dff 0%, #6839ff 30%, #651fff 70%, #6200ea 100%);
+  color: white;
+  padding: 40px 30px 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(103, 58, 183, 0.3);
+}
+
+.survey-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff4081, #7c4dff, #00bcd4);
+  z-index: 1;
+}
+
+.survey-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 64, 129, 0.1) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.survey-info {
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.survey-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
+  background: linear-gradient(to right, #ffffff, #e0e0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.survey-description {
+  font-size: 17px;
+  line-height: 1.6;
+  opacity: 0.95;
+  margin-bottom: 20px;
+  max-width: 700px;
+  font-weight: 400;
+}
+
+.survey-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 14px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.meta-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.meta-item i {
+  font-size: 16px;
+  color: #d1c4e9;
+}
+
+.meta-item span {
+  font-weight: 500;
+  color: #ede7f6;
+}
+
+/* Прогресс бар */
+.progress-container {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 2;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.progress-percent {
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.progress-text {
+  color: #ede7f6;
+}
+
+.progress-bar {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff4081, #7c4dff);
+  border-radius: 5px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 15px rgba(124, 77, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Декоративные элементы в header */
+.header-decoration {
+  position: absolute;
+  z-index: 1;
+}
+
+.decoration-1 {
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 64, 129, 0.2) 0%, transparent 70%);
+}
+
+.decoration-2 {
+  bottom: -30px;
+  left: -30px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 188, 212, 0.15) 0%, transparent 70%);
+}
+
+/* Адаптивность для header */
+@media (max-width: 768px) {
+  .survey-header {
+    padding: 30px 20px 20px;
+  }
+
+  .survey-title {
+    font-size: 26px;
+    letter-spacing: -0.3px;
+  }
+
+  .survey-description {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .survey-meta {
+    gap: 12px;
+  }
+
+  .meta-item {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .progress-container {
+    padding: 15px;
+  }
+
+  .progress-info {
+    font-size: 14px;
+  }
+}
+
+/* Прогресс бар */
+.progress-container {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.progress-percent {
+  font-weight: 600;
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #333;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Карточка вопроса */
+.survey-content {
+  padding: 30px;
+}
+
+.question-card {
+  display: none;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #eaeaea;
+  padding: 25px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.question-card.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.7;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.question-header {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.question-number {
+  display: inline-block;
+  background: #eef2ff;
+  color: #3b82f6;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.required {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.question-text {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+.question-hint {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Контейнер для вариантов ответов */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.option-item:hover {
+  border-color: #3b82f6;
+  background-color: #f8fafc;
+}
+
+.option-item input {
+  display: none;
+}
+
+.custom-radio,
+.custom-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  margin-right: 15px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox {
+  border-radius: 6px;
+}
+
+.option-item input:checked + .custom-radio {
+  border-color: #3b82f6;
+  background-color: #3b82f6;
+}
+
+.option-item input:checked + .custom-radio::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.option-item input:checked + .custom-checkbox {
+  border-color: #3b82f6;
+  background-color: #3b82f6;
+}
+
+.option-item input:checked + .custom-checkbox::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.option-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Шкала оценок */
+.scale-container {
+  margin-top: 10px;
+}
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.scale-labels span {
+  flex: 1;
+}
+
+.scale-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scale-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.scale-option input {
+  display: none;
+}
+
+.scale-number {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 18px;
+  color: #4b5563;
+  transition: all 0.2s ease;
+}
+
+.scale-option input:checked + .scale-number {
+  background: #3b82f6;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Текстовое поле */
+.text-input-container {
+  margin-top: 10px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.char-counter {
+  text-align: right;
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.char-count {
+  font-weight: 600;
+}
+
+/* Выпадающий список */
+.select-container {
+  position: relative;
+  margin-top: 10px;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  pointer-events: none;
+}
+
+/* Панель навигации */
+.survey-footer {
+  padding: 25px 30px;
+  background: #f9fafb;
+  border-top: 1px solid #eaeaea;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-success {
+  background: #10b981;
+  color: white;
+  width: 100%;
+  justify-content: center;
+  padding: 16px;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.btn-success:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+.question-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  background: white;
+  color: #6b7280;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-dot:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.nav-dot.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.footer-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.required-notice {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.time-estimate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .survey-container {
+    border-radius: 0;
+    margin: -20px;
+  }
+
+  .survey-header,
+  .survey-content,
+  .survey-footer {
+    padding: 20px;
+  }
+
+  .survey-title {
+    font-size: 24px;
+  }
+
+  .survey-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .scale-labels {
+    font-size: 11px;
+  }
+
+  .scale-number {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .question-nav {
+    order: 1;
+  }
+
+  .btn-secondary {
+    order: 2;
+  }
+
+  .btn-primary {
+    order: 3;
+  }
+
+  .footer-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

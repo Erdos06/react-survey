@@ -1,0 +1,238 @@
+// MainPageSurveyBlock.scss
+.survey-block {
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(168, 155, 203, 0.1);
+  border: 1px solid rgba(168, 155, 203, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 8px 24px rgba(168, 155, 203, 0.2),
+      0 2px 4px rgba(168, 155, 203, 0.1);
+    border-color: rgba(168, 155, 203, 0.3);
+
+    .survey-action {
+      transform: translateX(4px);
+      color: #7c6cb3;
+    }
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px rgba(124, 108, 179, 0.2),
+      0 8px 24px rgba(168, 155, 203, 0.2);
+  }
+
+  .survey-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .survey-header-main-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(121, 105, 241, 0.1) 0%, rgba(120, 75, 245, 0.05) 100%);
+
+    .survey-title-main-page {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2d2a40;
+      line-height: 1.4;
+      margin: 0;
+      flex: 1;
+    }
+
+    .survey-category {
+      font-size: 12px;
+      font-weight: 600;
+      color: #7c6cb3;
+      background: rgba(78, 98, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+  }
+
+  .survey-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .author-icon {
+        color: #7c6cb3;
+      }
+
+      .survey-author {
+        font-size: 14px;
+        color: #666680;
+        font-weight: 500;
+      }
+    }
+
+    .survey-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      .question-count,
+      .survey-date {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: #8a8aa3;
+
+        .meta-icon {
+          color: #a89bcb;
+        }
+      }
+    }
+  }
+
+  .survey-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(168, 155, 203, 0.1);
+
+    .participation-count {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #8a8aa3;
+
+      .participants-icon {
+        color: #ff6b9d;
+      }
+    }
+
+    .survey-action {
+      font-size: 14px;
+      font-weight: 600;
+      color: #7c6cb3;
+      transition: all 0.2s ease;
+
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-left: 4px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+// Адаптивные стили
+@media (max-width: 768px) {
+  .survey-block {
+    padding: 16px;
+    margin-bottom: 16px;
+
+    .survey-header {
+      .survey-title {
+        font-size: 16px;
+      }
+    }
+
+    .survey-info {
+      .author-info .survey-author {
+        font-size: 13px;
+      }
+
+      .survey-meta {
+        gap: 12px;
+
+        .question-count,
+        .survey-date {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .survey-footer {
+      .participation-count {
+        font-size: 12px;
+      }
+
+      .survey-action {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .survey-block {
+    .survey-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+
+      .survey-category {
+        align-self: flex-start;
+      }
+    }
+
+    .survey-info {
+      .survey-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    .survey-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+
+      .survey-action {
+        align-self: flex-end;
+      }
+    }
+  }
+}
+
+// Анимация появления
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.survey-block {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.delete-survey-button {
+  color: #a62626;
+}

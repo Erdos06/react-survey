@@ -1,0 +1,116 @@
+.create-survey-page {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 3px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 4px 20px rgba(103, 58, 183, 0.3);
+  border-radius: 10px;
+
+  & .create-survey-page-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 20px;
+    padding-left: 30px;
+
+    width: 800px;
+    height: 150px;
+    background-color: rgb(164, 151, 199);
+
+    color: white;
+    font-size: 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+}
+
+.create-survey-page-content {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  padding: 20px;
+  padding-left: 30px;
+
+  & .create-survey-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    & .survey-desription-label {
+      display: grid;
+      grid-template-columns: 220px 300px 200px;
+      gap: 20px;
+      align-items: center;
+
+      font-weight: bold;
+      margin-bottom: 5px;
+      margin-left: 25px;
+      font-size: 20px;
+
+      & .survey-description-input {
+        padding: 12px;
+        padding-left: 12px;
+
+        width: 350px;
+
+        border: 0.9px solid rgba(191, 178, 225, 0.708);
+        border-radius: 6px;
+
+        font-family: Montserrat, sans-serif;
+        font-size: 14px;
+        &:focus {
+          border: 0.9px solid rgb(173, 148, 217);
+          outline: none;
+        }
+      }
+
+      .use-username {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+
+        & input {
+          width: 14px;
+          height: 14px;
+          accent-color: rgb(186, 175, 214);
+        }
+
+        & .use-username-text {
+          font-size: 12px;
+          color: gray;
+        }
+      }
+    }
+
+    & .create-survey-button {
+      align-self: center;
+      width: 170px;
+      padding: 10px;
+      background-color: rgb(164, 151, 199);
+
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-2px);
+        transition: 0.3s ease;
+        background-color: rgb(173, 148, 217);
+      }
+      &:active {
+        transform: translateY(-1px);
+        transition: 0.1s ease;
+        background-color: rgb(164, 151, 199);
+      }
+    }
+  }
+}

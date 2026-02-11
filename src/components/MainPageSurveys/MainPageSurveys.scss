@@ -1,0 +1,29 @@
+.main-page-surveys {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  div {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: 10px;
+
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.title {
+  font-size: 34px;
+  color: rgb(70, 70, 70);
+}
+
+@media (max-width: 1000px) {
+  .main-page-surveys {
+    div {
+      grid-template-columns: repeat(1, max-content);
+    }
+  }
+}
