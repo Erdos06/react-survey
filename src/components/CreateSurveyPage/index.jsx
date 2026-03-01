@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Question from './QuestionTypes/Question';
 import AddQuestion from './QuestionTypes/AddQuestion';
 import './CreateSurveyPage.scss';
 
 function CreateSurveyPage() {
   const [questions, setQuestions] = useState([{ id: 1, type: 'radio', text: '', options: [] }]);
+
+  const navigate = useNavigate();
 
   const addQuestion = () => {
     setQuestions((prev) => [...prev, { id: Date.now(), type: 'text', text: '', options: [] }]);
@@ -37,6 +41,7 @@ function CreateSurveyPage() {
       const data = await res.json();
       console.log('Опрос создан:', data);
       alert('Опрос успешно создан!');
+      navigate('/');
     } catch (err) {
       console.error(err);
       alert('Ошибка при создании опроса');

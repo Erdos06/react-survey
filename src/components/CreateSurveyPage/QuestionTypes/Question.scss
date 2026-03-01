@@ -20,7 +20,7 @@
 
   display: grid;
 
-  grid-template-columns: 200px 400px;
+  grid-template-columns: 200px 370px 100px;
 
   & .question-number {
     font-size: 18px;
@@ -33,13 +33,20 @@
   }
 }
 
+.delete-question-button {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
 .divider-line {
   height: 1px;
   background-color: rgba(149, 133, 190, 0.463);
   margin-top: 10px;
   margin-left: 20px;
   margin-bottom: 20px;
-  width: 80%;
+  width: 89%;
 }
 
 .question-card-content {

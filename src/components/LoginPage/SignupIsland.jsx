@@ -52,7 +52,7 @@ function SignUpIsland({ setIsRegister }) {
         <span className="divider-text">or</span>
         <span className="divider-line"></span>
       </div>
-      <form className="login-form">
+      <form className="register-form">
         <div className="username-container">
           <img
             width="30"
