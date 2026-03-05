@@ -7,9 +7,6 @@ import SignUpIsland from './SignupIsland.jsx';
 function AuthPage({ signupPressed }) {
   const [isRegister, setIsRegister] = React.useState(signupPressed);
 
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
   return (
     <div className="auth-page">
       <div className="image-container">
@@ -22,13 +19,7 @@ function AuthPage({ signupPressed }) {
       {isRegister ? (
         <SignUpIsland setIsRegister={setIsRegister} />
       ) : (
-        <LoginIsland
-          email={email}
-          password={password}
-          setEmail={setEmail}
-          setPassword={setPassword}
-          setIsRegister={setIsRegister}
-        />
+        <LoginIsland setIsRegister={setIsRegister} />
       )}
     </div>
   );

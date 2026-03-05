@@ -1,8 +1,11 @@
 import React from 'react';
 import './MainPageSurveyBlock.scss';
 import { useNavigate } from 'react-router-dom';
+import { LoggedInContext } from '../../../App';
 
 function SurveyBlock({ survey }) {
+  const { isLoggedIn } = React.useContext(LoggedInContext);
+
   const navigate = useNavigate();
 
   const handleDelete = async (e) => {
@@ -70,22 +73,41 @@ function SurveyBlock({ survey }) {
             </svg>
             {survey.participants || 0} участников
           </span>
-          <span
+          {/* <span
             className="survey-action"
             onClick={() => {
               window.location.href = `http://localhost:3000/surveys/${survey.surveyId}`;
             }}>
             Пройти опрос →
-          </span>
+          </span> */}
+
+          {isLoggedIn && (
+            <span className="survey-action" onClick={() => navigate(`/surveys/${survey.surveyId}`)}>
+              Пройти опрос →
+            </span>
+          )}
         </div>
-        <span className="delete-survey-button" onClick={handleDelete}>
+        {/* <span className="delete-survey-button" onClick={handleDelete}>
           Удалить опрос
         </span>
         <span
           className="edit-survey-button"
           onClick={() => navigate(`/surveys/${survey.surveyId}/change`)}>
           Изменить опрос
-        </span>
+        </span> */}
+
+        {isLoggedIn && (
+          <>
+            <span className="delete-survey-button" onClick={handleDelete}>
+              Удалить опрос
+            </span>
+            <span
+              className="edit-survey-button"
+              onClick={() => navigate(`/surveys/${survey.surveyId}/change`)}>
+              Изменить опрос
+            </span>
+          </>
+        )}
       </div>
     </div>
   );

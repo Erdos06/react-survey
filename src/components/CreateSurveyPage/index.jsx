@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Question from './QuestionTypes/Question';
 import AddQuestion from './QuestionTypes/AddQuestion';
 import './CreateSurveyPage.scss';
+import api from '../../api/axios';
 
 function CreateSurveyPage() {
   const [questions, setQuestions] = useState([{ id: 1, type: 'radio', text: '', options: [] }]);
@@ -33,12 +34,8 @@ function CreateSurveyPage() {
     console.log(payload);
 
     try {
-      const res = await fetch('http://localhost:8081/surveys/new', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
+      const res = await api.post('/surveys/new', payload);
+      const data = await res.data;
       console.log('Опрос создан:', data);
       alert('Опрос успешно создан!');
       navigate('/');

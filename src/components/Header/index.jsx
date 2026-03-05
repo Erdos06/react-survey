@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { href, useNavigate } from 'react-router-dom';
 import { LoggedInContext } from '../../App';
 import React from 'react';
 
@@ -42,6 +42,10 @@ function Header() {
             </div>
 
             <img
+              onClick={() => {
+                localStorage.removeItem('token');
+                window.location.reload();
+              }}
               width="50"
               height="50"
               src="https://img.icons8.com/ios/50/user-male-circle--v1.png"

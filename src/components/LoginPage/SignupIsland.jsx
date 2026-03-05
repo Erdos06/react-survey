@@ -1,4 +1,24 @@
+import { signup, login } from '../../services/authService';
+import React from 'react';
+
 function SignUpIsland({ setIsRegister }) {
+  const [email, setEmail] = React.useState('');
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await signup(username, email, password);
+    } catch (error) {
+      console.error('Signup failed:', error.message);
+    }
+
+    const response = await login(username, password);
+    localStorage.setItem('token', response.token);
+    window.location.href = '/';
+  };
+
   return (
     <div className="auth-island register">
       <h1 className="welcome-text register">
@@ -52,7 +72,7 @@ function SignUpIsland({ setIsRegister }) {
         <span className="divider-text">or</span>
         <span className="divider-line"></span>
       </div>
-      <form className="register-form">
+      <form className="register-form" method="POST" onSubmit={handleSignup}>
         <div className="username-container">
           <img
             width="30"
@@ -60,7 +80,13 @@ function SignUpIsland({ setIsRegister }) {
             src="https://img.icons8.com/ios-glyphs/30/user--v1.png"
             alt="user--v1"
           />
-          <input type="text" placeholder="Username" className="login-input" />
+          <input
+            type="text"
+            placeholder="Username"
+            className="login-input"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          />
         </div>
         <div className="email-container">
           <img
@@ -69,7 +95,13 @@ function SignUpIsland({ setIsRegister }) {
             src="https://img.icons8.com/material-rounded/24/new-post.png"
             alt="new-post"
           />
-          <input type="email" placeholder="Email" className="login-input" />
+          <input
+            type="email"
+            placeholder="Email"
+            className="login-input"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
         </div>
         <div className="password-container">
           <img
@@ -78,7 +110,13 @@ function SignUpIsland({ setIsRegister }) {
             src="https://img.icons8.com/ios-glyphs/30/key--v1.png"
             alt="key--v1"
           />
-          <input type="password" placeholder="Password" className="login-input" />
+          <input
+            type="password"
+            placeholder="Password"
+            className="login-input"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
         </div>
         <button type="submit" className="login-button">
           Signup

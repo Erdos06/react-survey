@@ -44,9 +44,11 @@
 
   .survey-header-main-page {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
     gap: 12px;
+    width: max-content;
     background: linear-gradient(135deg, rgba(121, 105, 241, 0.1) 0%, rgba(120, 75, 245, 0.05) 100%);
 
     .survey-title-main-page {

@@ -1,4 +1,28 @@
-function LoginIsland({ email, password, setEmail, setPassword, setIsRegister }) {
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../services/authService';
+import { LoggedInContext } from '../../App';
+
+function LoginIsland({ setIsRegister }) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const navigate = useNavigate();
+
+  const { isLoggedIn, setIsLoggedIn } = React.useContext(LoggedInContext);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await login(email, password);
+      console.log('Login successful:', response);
+      setIsLoggedIn(true);
+      localStorage.setItem('token', response.token);
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed:', error.message);
+    }
+  };
+
   return (
     <div className="auth-island">
       <h1 className="welcome-text">
@@ -51,7 +75,7 @@ function LoginIsland({ email, password, setEmail, setPassword, setIsRegister }) 
         <span className="divider-text">or</span>
         <span className="divider-line"></span>
       </div>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleLogin}>
         <div className="email-container">
           <img
             width="24"
@@ -61,6 +85,7 @@ function LoginIsland({ email, password, setEmail, setPassword, setIsRegister }) 
           />
           <input
             type="text"
+            name="email"
             placeholder="Email or username"
             className="login-input"
             onChange={(e) => setEmail(e.target.value)}
@@ -76,6 +101,7 @@ function LoginIsland({ email, password, setEmail, setPassword, setIsRegister }) 
           />
           <input
             type="password"
+            name="password"
             placeholder="Password"
             className="login-input"
             onChange={(e) => setPassword(e.target.value)}

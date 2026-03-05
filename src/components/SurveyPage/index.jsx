@@ -10,6 +10,7 @@ import CheckBoxBlock from './QuestionBlock/CheckBoxBlock';
 import ScaleBlock from './QuestionBlock/ScaleBlock';
 import TextAreaBlock from './QuestionBlock/TextAreaBlock';
 import SelectQuestionBlock from './QuestionBlock/SelectQuestionBlock';
+import api from '../../api/axios';
 
 const BACKEND_URL = 'http://localhost:8081/surveys/';
 
@@ -21,16 +22,21 @@ function SurveyPage() {
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(1);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch(BACKEND_URL + id)
-      .then((response) => response.json())
-      .then((data) => {
-        setSurvey(data);
+    async function loadSurvey() {
+      try {
+        setIsLoading(true);
+
+        const response = await api.get(`/surveys/${id}`);
+
+        setSurvey(response.data);
+      } catch (error) {
+        console.error('Error fetching survey:', error);
+      } finally {
         setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching survey data:', error);
-      });
+      }
+    }
+
+    loadSurvey();
   }, [id]);
 
   if (survey === null || isLoading) {

@@ -5,13 +5,20 @@
   align-items: center;
   gap: 20px;
 
-  div {
+  .main-page-survey-container {
     display: grid;
     grid-template-columns: repeat(2, max-content);
     gap: 10px;
 
     align-items: center;
     justify-content: center;
+  }
+
+  &.logged-out {
+    .main-page-survey-container {
+      grid-template-columns: repeat(4, max-content);
+      gap: 25px;
+    }
   }
 }
 
