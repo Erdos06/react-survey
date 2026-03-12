@@ -2,6 +2,7 @@ import React from 'react';
 import './MainPageSurveyBlock.scss';
 import { useNavigate } from 'react-router-dom';
 import { LoggedInContext } from '../../../App';
+import api from '../../../api/axios';
 
 function SurveyBlock({ survey }) {
   const { isLoggedIn } = React.useContext(LoggedInContext);
@@ -12,15 +13,18 @@ function SurveyBlock({ survey }) {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:8081/surveys/' + survey.surveyId, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const res = await api.delete('/surveys/' + survey.surveyId);
 
       console.log('Опрос удален успешно:');
       alert('Опрос успешно удален!');
       navigate(0);
     } catch (err) {
+      if (err.response && err.response.status === 401) {
+        alert('Пожалуйста, войдите в систему, чтобы удалить опрос.');
+        window.location.href = '/login';
+        localStorage.removeItem('token');
+        return;
+      }
       console.error(err);
       alert('Ошибка при удалении опроса');
     }

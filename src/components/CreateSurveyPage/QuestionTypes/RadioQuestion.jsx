@@ -49,7 +49,7 @@ function RadioQuestion({ setQuestions, questionIndex, questionType, question }) 
           {options.map((option, index) => {
             return (
               <Option
-                option={option}
+                option={option.optionText || option}
                 index={index}
                 setOptions={setOptions}
                 options={options}

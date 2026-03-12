@@ -21,7 +21,6 @@ function CreateSurveyPage() {
     const formData = new FormData(e.target);
     const payload = {
       title: formData.get('surveyTitle'),
-      author: 'Erdos',
       description: formData.get('surveyDescription'),
       questions: questions.map((q) => ({
         text: q.text,
@@ -40,6 +39,12 @@ function CreateSurveyPage() {
       alert('Опрос успешно создан!');
       navigate('/');
     } catch (err) {
+      if (err.response && err.response.status === 401) {
+        alert('Пожалуйста, войдите в систему, чтобы создать опрос.');
+        window.location.href = '/login';
+        localStorage.removeItem('token');
+        return;
+      }
       console.error(err);
       alert('Ошибка при создании опроса');
     }

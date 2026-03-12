@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import api from '../../api/axios';
 
 import Question from '../CreateSurveyPage/QuestionTypes/Question';
 import AddQuestion from '../CreateSurveyPage/QuestionTypes/AddQuestion';
@@ -11,12 +12,28 @@ function EditSurveyPage() {
 
   React.useEffect(() => {
     async function loadSurvey() {
-      const data = await fetchSurvey(id);
-      setSurvey(data);
-      setQuestions(data.questions);
+      try {
+        const data = await api.get('/surveys/' + id).then((res) => res.data);
+        setSurvey(data);
+
+        const normalizedQuestions = data.questions.map((q) => ({
+          ...q,
+          options: q.options ? q.options.map((o) => o.optionText) : [],
+        }));
+
+        setQuestions(normalizedQuestions);
+      } catch (err) {
+        if (err.response && err.response.status === 401) {
+          alert('Пожалуйста, войдите в систему, чтобы изменить опрос.');
+          window.location.href = '/login';
+          localStorage.removeItem('token');
+          return;
+        }
+        console.log(err);
+      }
     }
     loadSurvey();
-  }, []);
+  }, [id]);
 
   const addQuestion = () => {
     setQuestions((prev) => [...prev, { id: Date.now(), type: 'text', text: '', options: [] }]);
@@ -35,19 +52,26 @@ function EditSurveyPage() {
         text: q.text,
         type: q.type,
         required: q.required || false,
-        options: q.type === 'textarea' ? null : q.options.map((o) => ({ optionText: o })),
+        options:
+          q.type === 'textarea'
+            ? null
+            : q.options.map((o) => ({
+                optionText: typeof o === 'string' ? o : o.optionText,
+              })),
       })),
     };
 
-    console.log(payload);
-
     try {
-      await fetch(`http://localhost:8081/surveys/${survey.surveyId}/change`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+      await api.put('/surveys/' + survey.surveyId + '/change', payload);
+      alert('Опрос успешно изменен!');
+      window.location.href = '/';
     } catch (err) {
+      if (err.response && err.response.status === 401) {
+        alert('Пожалуйста, войдите в систему, чтобы изменить опрос.');
+        window.location.href = '/login';
+        localStorage.removeItem('token');
+        return;
+      }
       console.log(err);
     }
   };
@@ -85,7 +109,7 @@ function EditSurveyPage() {
 
           {questions.map((question, index) => (
             <Question
-              key={question.id}
+              key={question.questionId}
               questionIndex={index}
               questions={questions}
               setQuestions={setQuestions}
@@ -104,12 +128,4 @@ function EditSurveyPage() {
   );
 }
 
-async function fetchSurvey(id) {
-  let res = await fetch('http://localhost:8081/surveys/' + id);
-  if (!res.ok) throw new Error('ERROR DURING CONNECTION TO BACKEND');
-  const data = await res.json();
-
-  console.log(data);
-  return data;
-}
 export default EditSurveyPage;
