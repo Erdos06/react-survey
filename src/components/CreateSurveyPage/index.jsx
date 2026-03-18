@@ -39,14 +39,10 @@ function CreateSurveyPage() {
       alert('Опрос успешно создан!');
       navigate('/');
     } catch (err) {
+      console.error('Ошибка при создании опроса:', err);
       if (err.response && err.response.status === 401) {
-        alert('Пожалуйста, войдите в систему, чтобы создать опрос.');
-        window.location.href = '/login';
-        localStorage.removeItem('token');
         return;
       }
-      console.error(err);
-      alert('Ошибка при создании опроса');
     }
   };
 

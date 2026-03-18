@@ -27,8 +27,8 @@ function MainPageSurveys() {
     <div className={isLoggedIn ? 'main-page-surveys' : 'main-page-surveys logged'}>
       <p className="title">Опросы</p>
       <div className="main-page-survey-container">
-        {surveys.map((survey) => (
-          <SurveyBlock key={survey.surveyId} survey={survey} />
+        {surveys.map((survey, index) => (
+          <SurveyBlock key={index} survey={survey} />
         ))}
       </div>
     </div>

@@ -1,6 +1,6 @@
 import './SurveyPage.scss';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import SurveyPageHeader from './SurveyPageHeader';
@@ -11,8 +11,7 @@ import ScaleBlock from './QuestionBlock/ScaleBlock';
 import TextAreaBlock from './QuestionBlock/TextAreaBlock';
 import SelectQuestionBlock from './QuestionBlock/SelectQuestionBlock';
 import api from '../../api/axios';
-
-const BACKEND_URL = 'http://localhost:8081/surveys/';
+import { AnswerProvider } from './AnswerContext';
 
 function SurveyPage() {
   const { id } = useParams();
@@ -20,15 +19,17 @@ function SurveyPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [survey, setSurvey] = useState(null);
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(1);
+  const [surveyAnswer, setSurveyAnswer] = useState({});
 
   useEffect(() => {
     async function loadSurvey() {
       try {
         setIsLoading(true);
+        const surveysResponse = await api.get(`/surveys/${id}`);
+        const surveyAnswerResponse = await api.post(`/surveys/${id}/start`);
 
-        const response = await api.get(`/surveys/${id}`);
-
-        setSurvey(response.data);
+        setSurvey(surveysResponse.data);
+        setSurveyAnswer(surveyAnswerResponse.data);
       } catch (error) {
         console.error('Error fetching survey:', error);
       } finally {
@@ -64,25 +65,29 @@ function SurveyPage() {
   };
 
   return (
-    <div className="survey-page-main">
-      <div className="survey-container">
-        <SurveyPageHeader
-          title={survey.title}
-          author={survey.author}
-          questionCount={survey.questions.length}
-          currentQuestionIndex={currentQuestionIndex}
-          date={new Date(survey.createdAt).toLocaleDateString()}
-        />
+    <AnswerProvider>
+      <div className="survey-page-main">
+        <div className="survey-container">
+          <SurveyPageHeader
+            title={survey.title}
+            author={survey.author}
+            questionCount={survey.questions.length}
+            currentQuestionIndex={currentQuestionIndex}
+            date={new Date(survey.createdAt).toLocaleDateString()}
+          />
 
-        <main className="survey-content">{renderQuestion()}</main>
+          <main className="survey-content">{renderQuestion()}</main>
 
-        <SurveyPageFooter
-          currentQuestionIndex={currentQuestionIndex}
-          setcurrentQuestionIndex={setcurrentQuestionIndex}
-          totalQuestions={survey.questions.length}
-        />
+          <SurveyPageFooter
+            currentQuestionIndex={currentQuestionIndex}
+            setcurrentQuestionIndex={setcurrentQuestionIndex}
+            totalQuestions={survey.questions.length}
+            questions={survey.questions}
+            surveyId={survey.surveyId}
+          />
+        </div>
       </div>
-    </div>
+    </AnswerProvider>
   );
 }
 
